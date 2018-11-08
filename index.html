@@ -1,0 +1,47 @@
+<html>
+
+<head>
+  <title>Just News</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="./styles.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div class="header">
+      <div class="header_content">
+        <a href=""><img src="./news.png" alt=""></a>
+        <div class="header_search">
+          <input class="search_field" type="text" id="search" placeholder="Search" v-model="query">
+        </div>
+      </div>
+    </div>
+    <div class="content" v-on:scroll.passive="onScroll">
+      <div v-if="posts.length > 0">
+        <div v-for="post in posts" class="post">
+          <a target="_blank" :href="post.url">
+            <h1>{{post.title}}</h1>
+          </a>
+          <a target="_blank" :href="post.url">
+            <img :src="post.urlToImage" alt="">
+          </a>
+          <p class="post_description">{{post.description}}</p>
+          <p class="post_date">{{new Date(post.publishedAt).toLocaleString()}}</p>
+        </div>
+      </div>
+      <div v-else>
+        <div class="error">
+          <h1 v-if="query">Sorry. There is nothing.</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="./app.js"></script>
+</body>
+
+</html>
